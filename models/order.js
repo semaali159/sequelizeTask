@@ -23,30 +23,30 @@ const Order = sequelize.define(
     timestamps: true,
   }
 );
-Order.addHook("beforeCreate", async (order, options) => {
-  const orderProducts = await db.OrderProduct.findAll({
-    where: { orderId: order.id },
-    include: [{ model: db.Product }],
-  });
+// Order.addHook("beforeCreate", async (order, options) => {
+//   const orderProducts = await db.OrderProduct.findAll({
+//     where: { orderId: order.id },
+//     include: [{ model: db.Product }],
+//   });
 
-  const totalAmount = orderProducts.reduce((sum, orderProduct) => {
-    return sum + orderProduct.Product.price * orderProduct.quantity;
-  }, 0);
+//   const totalAmount = orderProducts.reduce((sum, orderProduct) => {
+//     return sum + orderProduct.Product.price * orderProduct.quantity;
+//   }, 0);
 
-  order.totalAmount = totalAmount;
-});
+//   order.totalAmount = totalAmount;
+// });
 
-Order.addHook("beforeUpdate", async (order, options) => {
-  const orderProducts = await db.OrderProduct.findAll({
-    where: { orderId: order.id },
-    include: [{ model: db.Product }],
-  });
+// Order.addHook("beforeUpdate", async (order, options) => {
+//   const orderProducts = await db.OrderProduct.findAll({
+//     where: { orderId: order.id },
+//     include: [{ model: db.Product }],
+//   });
 
-  const totalAmount = orderProducts.reduce((sum, orderProduct) => {
-    return sum + orderProduct.Product.price * orderProduct.quantity;
-  }, 0);
+//   const totalAmount = orderProducts.reduce((sum, orderProduct) => {
+//     return sum + orderProduct.Product.price * orderProduct.quantity;
+//   }, 0);
 
-  order.totalAmount = totalAmount;
-});
+//   order.totalAmount = totalAmount;
+// });
 
 module.exports = Order;

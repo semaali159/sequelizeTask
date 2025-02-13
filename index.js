@@ -3,6 +3,7 @@ const sequelize = require("./config/connection");
 const authentication = require("./routes/authentication");
 const category = require("./routes/category");
 const product = require("./routes/product");
+const order = require("./routes/order");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use("/api/auth", authentication);
 app.use("/api/category", category);
 app.use("/api/product", product);
+app.use("/api/order", order);
 
 sequelize
   .sync({ force: false })
